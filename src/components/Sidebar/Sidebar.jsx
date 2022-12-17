@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { NavLink as NavLinkRRD, Link } from "react-router-dom";
 import PropTypes from "prop-types";
-
 // reactstrap components
 import {
   Collapse,

@@ -1,8 +1,8 @@
-import Workspace from "views/workspace/Workspace";
+import Workspaces from "views/workspace/Workspaces";
 var routes = [
   {
-    path: "/workspace",
-    element: <Workspace />,
+    path: "/workspaces",
+    element: <Workspaces />,
     name: "Workspaces",
     icon: "ni ni-collection",
   },

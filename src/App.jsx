@@ -10,10 +10,7 @@ export default function App() {
     },
     {
       element: <Main />,
-      children: [
-        ...routes.mainLayout.workspace,
-        ...routes.mainLayout.console,
-      ],
+      children: [...routes.mainLayout.workspace, ...routes.mainLayout.console],
     },
     {
       path: "*",

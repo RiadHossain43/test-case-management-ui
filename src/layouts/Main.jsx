@@ -6,7 +6,6 @@ import { Container } from "reactstrap";
 import AdminNavbar from "components/Navbars/AdminNavbar";
 import AdminFooter from "components/Footers/AdminFooter";
 import Sidebar from "components/Sidebar/Sidebar";
-
 import routesObject from "routes.js";
 import AdminHeader from "components/Headers/AdminHeader";
 const routes = Object.keys(routesObject.mainLayout).reduce(
@@ -25,8 +24,7 @@ const Main = (props) => {
 
   const getBrandText = () => {
     for (let i = 0; i < routes.length; i++) {
-      if (location.pathname === routes[i].path)
-        return routes[i].name;
+      if (location.pathname === routes[i].path) return routes[i].name;
     }
     return "Brand";
   };

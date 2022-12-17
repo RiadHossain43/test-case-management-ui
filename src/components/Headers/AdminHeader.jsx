@@ -9,7 +9,7 @@ const AdminHeader = () => {
         <Container fluid>
           <FormGroup className="mb-3">
             <InputGroup className="input-group-alternative">
-              <Input placeholder="Search questions" type="text" />
+              <Input placeholder="Search..." type="text" />
             </InputGroup>
           </FormGroup>
         </Container>
