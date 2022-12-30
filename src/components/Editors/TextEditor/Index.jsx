@@ -4,7 +4,7 @@ import WrappedEditor from "./WrappedEditor";
 export default function Index(props) {
   return (
     <TextEditorContextProvider {...props}>
-      <WrappedEditor />
+      <WrappedEditor {...props} />
     </TextEditorContextProvider>
   );
 }

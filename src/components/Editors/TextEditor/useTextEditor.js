@@ -13,7 +13,11 @@ import {
 import { ELEMENT_TYPES } from "./elementTypes";
 import { ENTITY_NAME } from "./entities/entityNames";
 import { mentionDecorator } from "./entities/Mentions";
-const compositeDecorator = new CompositeDecorator([mentionDecorator]);
+import { httpsLinkDecorator } from "./entities/HttpsLink";
+const compositeDecorator = new CompositeDecorator([
+  mentionDecorator,
+  httpsLinkDecorator,
+]);
 export default function useTextEditor(config) {
   const editorRef = React.useRef(null);
   const [editorState, setEditorState] = React.useState(
