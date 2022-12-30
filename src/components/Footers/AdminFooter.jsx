@@ -12,11 +12,11 @@ const Footer = () => {
             © {new Date().getFullYear()}{" "}
             <a
               className="font-weight-bold ml-1"
-              href="https://github.com/RiadHossain43/queryo-client"
+              href="#"
               rel="noopener noreferrer"
               target="_blank"
             >
-              Queryo 
+              Automatise
             </a>{" "}
             all rights reserved
           </div>
