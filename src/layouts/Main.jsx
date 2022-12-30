@@ -6,12 +6,7 @@ import { Container } from "reactstrap";
 import AdminNavbar from "components/Navbars/AdminNavbar";
 import AdminFooter from "components/Footers/AdminFooter";
 import Sidebar from "components/Sidebar/Sidebar";
-import routesObject from "routes.js";
 import AdminHeader from "components/Headers/AdminHeader";
-const routes = Object.keys(routesObject.mainLayout).reduce(
-  (total, key) => [...total, ...routesObject.mainLayout[key]],
-  []
-);
 const Main = (props) => {
   const mainContent = React.useRef(null);
   const location = useLocation();
@@ -23,8 +18,9 @@ const Main = (props) => {
   }, [location]);
 
   const getBrandText = () => {
-    for (let i = 0; i < routes.length; i++) {
-      if (location.pathname === routes[i].path) return routes[i].name;
+    for (let i = 0; i < props.navigation.length; i++) {
+      if (location.pathname === props.navigation[i].path)
+        return props.navigation[i].name;
     }
     return "Brand";
   };
@@ -32,7 +28,7 @@ const Main = (props) => {
     <>
       <Sidebar
         {...props}
-        routes={routes}
+        routes={props.navigation}
         logo={{
           innerLink: "/admin/index",
           imgSrc: require("../assets/img/brand/logo.svg").default,

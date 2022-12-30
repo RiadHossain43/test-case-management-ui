@@ -3,7 +3,7 @@ $guide-height: 75px;
   padding: $input-padding-y $input-padding-x;
   min-height: 200px;
   background-color: $input-focus-bg;
-	border-radius: $input-border-radius;
+  border-radius: $input-border-radius;
   box-shadow: $input-alternative-box-shadow;
   hr {
     margin: $input-padding-y 0;
@@ -21,7 +21,7 @@ $guide-height: 75px;
     transition: 0.3s ease-in-out;
     overflow: hidden;
   }
-  .resize-focused{
+  .resize-focused {
     box-shadow: $input-alternative-box-shadow;
   }
   .resize-bar {
@@ -52,4 +52,13 @@ $guide-height: 75px;
 }
 .draft-toolbar-button-separator {
   color: $input-border-color;
+}
+.public-DraftStyleDefault-pre {
+  background-color: $gray-100;
+  border-radius: $border-radius;
+  padding: $btn-padding-y $btn-padding-y;
+  pre {
+    padding: 0;
+    margin: 0;
+  }
 }

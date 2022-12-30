@@ -9,7 +9,14 @@ export default function App() {
       children: [...routes.authLayout.auth, ...routes.authLayout.fallback],
     },
     {
-      element: <Main />,
+      element: (
+        <Main
+          navigation={[
+            ...routes.mainLayout.workspace,
+            ...routes.mainLayout.console,
+          ]}
+        />
+      ),
       children: [...routes.mainLayout.workspace, ...routes.mainLayout.console],
     },
     {

@@ -4,8 +4,9 @@ import toolTypes from "./toolTypes";
 import ButtonSeparator from "./ButtonSeparator";
 import { Button } from "reactstrap";
 import FilePicker from "./FilePicker";
+import classNames from "classnames";
 export default function ToolBar(props) {
-  const { getFileInputProps, handleToolClick } =
+  const { getFileInputProps, editorState, handleToolClick } =
     React.useContext(TextEditorContext);
   return (
     <>
@@ -17,12 +18,29 @@ export default function ToolBar(props) {
               return (
                 <Button
                   title={tool?.label}
-                  type="button"
-                  className={`btn btn-icon text-muted m-0`}
+                  // type="button"
+                  className={"btn btn-icon text-muted m-0"}
                   key={tool?.style}
                   onClick={(e) => handleToolClick(tool)}
                 >
-                  {tool.icon ? <i className={tool.icon} /> : tool?.label}
+                  {tool.icon ? (
+                    <i
+                      className={classNames(tool.icon, {
+                        "text-primary":
+                          editorState
+                            .getCurrentInlineStyle()
+                            .has(tool?.style) ||
+                          editorState
+                            ?.getCurrentContent()
+                            .getBlockForKey(
+                              editorState?.getSelection().getStartKey()
+                            )
+                            .getType() === tool?.style,
+                      })}
+                    />
+                  ) : (
+                    tool?.label
+                  )}
                 </Button>
               );
             })}
