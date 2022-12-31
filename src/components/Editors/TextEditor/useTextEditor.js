@@ -14,9 +14,11 @@ import { ELEMENT_TYPES } from "./elementTypes";
 import { ENTITY_NAME } from "./entities/entityNames";
 import { mentionDecorator } from "./entities/Mentions";
 import { httpsLinkDecorator } from "./entities/HttpsLink";
+import { textLinkDecorator, handleCreateLink } from "./entities/Link";
 const compositeDecorator = new CompositeDecorator([
   mentionDecorator,
   httpsLinkDecorator,
+  textLinkDecorator,
 ]);
 export default function useTextEditor(config) {
   const editorRef = React.useRef(null);
@@ -76,7 +78,7 @@ export default function useTextEditor(config) {
   }, [config.value]);
   const fileInput = React.useRef(null);
   const _openFilePrompt = () => fileInput.current.click();
-  const _createEntity = (command, data) => {
+  const _createAtomicBlockEntity = (command, data) => {
     const contentState = editorState.getCurrentContent();
     const contentStateWithEntity = contentState.createEntity(
       command,
@@ -136,7 +138,7 @@ export default function useTextEditor(config) {
       if (!storageInformations.every((storageInfo) => storageInfo))
         console.log("one or mutiple files don't have storage info");
       storageInformations.map((storageInfo) =>
-        _createEntity(ENTITY_NAME.IMAGE, {
+        _createAtomicBlockEntity(ENTITY_NAME.IMAGE, {
           storageInfo,
         })
       );
@@ -155,15 +157,13 @@ export default function useTextEditor(config) {
   });
   const _atomicEntityController = {
     [ENTITY_NAME.IMAGE]: _openFilePrompt,
-    [ENTITY_NAME.LINK]: () => {
-      let link = window.prompt("Paste the link bellow:");
-      let linkText = window.prompt("Paste the link-text bellow:");
-      _createEntity(ENTITY_NAME.LINK, { href: link, linkText });
-    },
-    [ENTITY_NAME.DIVIDER]: () => _createEntity(ENTITY_NAME.DIVIDER, {}),
+    [ENTITY_NAME.LINK]: () =>
+      handleEditorStateChange(handleCreateLink(editorState)),
+    [ENTITY_NAME.DIVIDER]: () =>
+      _createAtomicBlockEntity(ENTITY_NAME.DIVIDER, {}),
     [ENTITY_NAME.MENTION]: () => {},
     [ENTITY_NAME.CHECKLIST]: () => {
-      _createEntity(ENTITY_NAME.CHECKLIST, {});
+      _createAtomicBlockEntity(ENTITY_NAME.CHECKLIST, {});
     },
   };
   const _buttonHandlers = {
