@@ -25,6 +25,10 @@ export default function useTextEditor(config) {
   const [editorState, setEditorState] = React.useState(
     EditorState.createEmpty(compositeDecorator)
   );
+  console.log(
+    "editor selection anchor offset",
+    editorState.getSelection().getAnchorOffset()
+  );
   const [
     computedPosForMentionSuggestions,
     setComputedPosForMentionSuggestions,
@@ -114,7 +118,7 @@ export default function useTextEditor(config) {
   const handleEditorStateChange = (editorState) => {
     const contentState = editorState.getCurrentContent();
     setEditorState(editorState);
-    config.onDataStructureChange(JSON.stringify(convertToRaw(contentState)));
+    // config.onDataStructureChange(JSON.stringify(convertToRaw(contentState)));
   };
   const handleKeyCommand = (command, editorState) => {
     let newState = RichUtils.handleKeyCommand(editorState, command);

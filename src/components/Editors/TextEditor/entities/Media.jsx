@@ -16,9 +16,6 @@ export default function Media({ type, data, editorControllers, ...rest }) {
       </Resizer>
     );
   }
-  if (type === ENTITY_NAME.LINK) {
-    media = <Link {...data} />;
-  }
   if (type === ENTITY_NAME.DIVIDER) {
     media = <Divider {...data} />;
   }
