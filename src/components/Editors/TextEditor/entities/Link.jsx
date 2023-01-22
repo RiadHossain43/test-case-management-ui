@@ -43,7 +43,7 @@ export const handleCreateLink = (editorState) => {
         "anchorOffset",
         selection.getAnchorOffset() + linkText.length
       );
-      const editorStateWithTextLinkEnttty = EditorState.set(
+      const editorStateWithTextLinkEntity = EditorState.set(
         editorState,
         {
           currentContent: contentWithTextLinkEntity,
@@ -51,7 +51,7 @@ export const handleCreateLink = (editorState) => {
         "create-entity"
       );
       const editorStateWithNewSelection = EditorState.forceSelection(
-        editorStateWithTextLinkEnttty,
+        editorStateWithTextLinkEntity,
         newSelectionState
       );
       console.log(
