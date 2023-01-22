@@ -84,12 +84,12 @@ export const BLOCK_TYPES = [
   // },
 ];
 export const ENTITY_TYPES = [
-  {
-    label: "Link",
-    style: ENTITY_NAME.LINK,
-    icon: "fa-solid fa-link",
-    element: ELEMENT_TYPES.ATOMIC_ENTITY,
-  },
+  // {
+  //   label: "Link",
+  //   style: ENTITY_NAME.LINK,
+  //   icon: "fa-solid fa-link",
+  //   element: ELEMENT_TYPES.ATOMIC_ENTITY,
+  // },
   {
     label: "Image",
     style: ENTITY_NAME.IMAGE,

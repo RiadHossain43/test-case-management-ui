@@ -1,8 +1,11 @@
+/**
+ * TODO: following piece of codes are unstable and buggy need to 
+ * work on these before integration.
+ */
 import {
   CompositeDecorator,
   EditorState,
   Modifier,
-  SelectionState,
 } from "draft-js";
 import { ENTITY_NAME } from "./entityNames";
 const findLinkEntities = (contentBlock, callback, contentState) => {
