@@ -10,6 +10,7 @@ import {
   Row,
 } from "reactstrap";
 import uuid from "react-uuid";
+import ActionsDropdown from "./ActionsDropdown";
 const AdvancedTable = ({ title, columns = [], data = [] }) => {
   return (
     <Row>
@@ -35,7 +36,15 @@ const AdvancedTable = ({ title, columns = [], data = [] }) => {
                 return (
                   <tr key={uuid()}>
                     {columns.map((col) => (
-                      <td key={uuid()}>{row[col.accessor]}</td>
+                      <>
+                        {col.accessor === "actions" ? (
+                          <td className="text-right">
+                            <ActionsDropdown actions={row["actions"] || []} />
+                          </td>
+                        ) : (
+                          <td key={uuid()}>{row[col.accessor]}</td>
+                        )}
+                      </>
                     ))}
                   </tr>
                 );
@@ -47,6 +56,7 @@ const AdvancedTable = ({ title, columns = [], data = [] }) => {
               <Pagination
                 className="pagination justify-content-end mb-0"
                 listClassName="justify-content-end mb-0"
+                size="sm"
               >
                 <PaginationItem className="disabled">
                   <PaginationLink
