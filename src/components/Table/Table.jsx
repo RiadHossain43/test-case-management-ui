@@ -8,13 +8,14 @@ import {
   PaginationLink,
   Table,
   Row,
+  Col,
 } from "reactstrap";
 import uuid from "react-uuid";
 import ActionsDropdown from "./ActionsDropdown";
 const AdvancedTable = ({ title, columns = [], data = [] }) => {
   return (
     <Row>
-      <div className="col">
+      <Col>
         <Card className="shadow">
           <CardHeader className="border-0">
             <h3 className="mb-0">{title}</h3>
@@ -105,7 +106,7 @@ const AdvancedTable = ({ title, columns = [], data = [] }) => {
             </nav>
           </CardFooter>
         </Card>
-      </div>
+      </Col>
     </Row>
   );
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   EditorState,
   RichUtils,
@@ -21,25 +21,24 @@ const compositeDecorator = new CompositeDecorator([
   textLinkDecorator,
 ]);
 export default function useTextEditor(config) {
-  const editorRef = React.useRef(null);
-  const [editorState, setEditorState] = React.useState(
+  const editorRef = useRef(null);
+  const [editorState, setEditorState] = useState(
     EditorState.createEmpty(compositeDecorator)
   );
-  console.log(
-    "editor selection anchor offset",
-    editorState.getSelection().getAnchorOffset()
-  );
+  const [focusedForEditing, setFocusedForEditing] = useState(false);
   const [
     computedPosForMentionSuggestions,
     setComputedPosForMentionSuggestions,
-  ] = React.useState({ display: "none" });
+  ] = useState({ display: "none" });
   const updateComputedPosForMentionSuggestions = (position) =>
     setComputedPosForMentionSuggestions(position);
   /**
    * the following effect block handles if the component is being
    * controlled by outside values.
    */
-  React.useEffect(() => {
+  const activateEditor = () => setFocusedForEditing(true);
+  const deactivateEditor = () => setFocusedForEditing(false);
+  useEffect(() => {
     let currentContent;
     try {
       if (typeof config.value === "string") {
@@ -65,22 +64,16 @@ export default function useTextEditor(config) {
     }
     if (config.value || currentContent) {
       return handleEditorStateChange(
-        EditorState.set(editorState, {
-          currentContent: convertFromRaw(currentContent),
-          /**
-           * following solution is implemented to get the direction map for the editor
-           * with current content. Draftjs has got an issue with direction map.
-           * see issue : https://github.com/facebook/draft-js/issues/1820
-           */
-          directionMap: EditorState.createWithContent(
-            convertFromRaw(currentContent)
-          ).getDirectionMap(),
-        })
+        EditorState.push(
+          editorState,
+          convertFromRaw(currentContent),
+          "change-block-data"
+        )
       );
     }
     return handleEditorStateChange(EditorState.createEmpty(compositeDecorator));
-  }, [config.value]);
-  const fileInput = React.useRef(null);
+  }, []);
+  const fileInput = useRef(null);
   const _openFilePrompt = () => fileInput.current.click();
   const _createAtomicBlockEntity = (command, data) => {
     const contentState = editorState.getCurrentContent();
@@ -118,7 +111,8 @@ export default function useTextEditor(config) {
   const handleEditorStateChange = (editorState) => {
     const contentState = editorState.getCurrentContent();
     setEditorState(editorState);
-    // config.onDataStructureChange(JSON.stringify(convertToRaw(contentState)));
+    // console.log(JSON.stringify(convertToRaw(contentState)));
+    config.onDataStructureChange(JSON.stringify(convertToRaw(contentState)));
   };
   const handleKeyCommand = (command, editorState) => {
     let newState = RichUtils.handleKeyCommand(editorState, command);
@@ -181,7 +175,9 @@ export default function useTextEditor(config) {
       _atomicEntityController[command]();
     },
   };
-  const handleToolClick = (tool) => {
+  const handleToolClick = (tool, e) => {
+    e.preventDefault();
+    if (!editorState.getSelection().getHasFocus()) return null;
     if (!tool?.element) return null;
     _buttonHandlers[tool.element](tool.style);
   };
@@ -238,10 +234,20 @@ export default function useTextEditor(config) {
     editorRef.current.editor?.focus();
     handleEditorStateChange(EditorState.moveFocusToEnd(editorState));
   };
+  const isToolActive = (tool) => {
+    return (
+      editorState.getCurrentInlineStyle().has(tool?.style) ||
+      editorState
+        ?.getCurrentContent()
+        .getBlockForKey(editorState?.getSelection().getStartKey())
+        .getType() === tool?.style
+    );
+  };
   return {
     editorRef,
     editorState,
     computedPosForMentionSuggestions,
+    focusedForEditing,
     getFileInputProps,
     generateLink,
     handleDroppedFiles,
@@ -252,5 +258,8 @@ export default function useTextEditor(config) {
     forceFocusEditorEnd,
     updateComputedPosForMentionSuggestions,
     handleMentionSelect,
+    activateEditor,
+    deactivateEditor,
+    isToolActive,
   };
 }
