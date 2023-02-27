@@ -6,7 +6,7 @@ import { Button } from "reactstrap";
 import FilePicker from "./FilePicker";
 import classNames from "classnames";
 export default function ToolBar(props) {
-  const { getFileInputProps, editorState, handleToolClick } =
+  const { getFileInputProps, isToolActive, handleToolClick } =
     React.useContext(TextEditorContext);
   return (
     <>

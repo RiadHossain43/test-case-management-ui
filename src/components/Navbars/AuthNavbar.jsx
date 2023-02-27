@@ -19,7 +19,7 @@ const AdminNavbar = () => {
       <Navbar className="navbar-top navbar-horizontal" expand="md">
         <Container className="px-4">
           <NavbarBrand to="/" tag={Link}>
-            <img className="navbar-brand-img" alt="automatise"  src={logo} />
+            <img className="navbar-brand-img" alt="automatise" src={logo} />
           </NavbarBrand>
           <button className="navbar-toggler" id="navbar-collapse-main">
             <span className="navbar-toggler-icon" />
@@ -29,10 +29,7 @@ const AdminNavbar = () => {
               <Row>
                 <Col className="collapse-brand" xs="6">
                   <Link to="/">
-                    <img
-                      alt="..."
-                      src={logo}
-                    />
+                    <img alt="..." src={logo} />
                   </Link>
                 </Col>
                 <Col className="collapse-close" xs="6">
@@ -48,12 +45,6 @@ const AdminNavbar = () => {
                 <NavLink className="nav-link-icon" to="/console" tag={Link}>
                   <i className="ni ni-tv-2" />
                   <span className="nav-link-inner--text">Console</span>
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink className="nav-link-icon" to="/auth/login" tag={Link}>
-                  <i className="ni ni-key-25" />
-                  <span className="nav-link-inner--text">Login</span>
                 </NavLink>
               </NavItem>
             </Nav>

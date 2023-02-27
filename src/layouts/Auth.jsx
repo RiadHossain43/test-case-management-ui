@@ -22,7 +22,7 @@ const Auth = (props) => {
         <AuthNavbar />
         {/* <div className="header py-7 py-lg-8"></div> */}
         <AuthHeader />
-        <Container className="mt-5 pb-5">
+        <Container className="mt-3 pb-3">
           <Outlet />
         </Container>
       </div>

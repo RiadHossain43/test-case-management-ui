@@ -6,7 +6,7 @@ const Workspaces = () => {
   return (
     <Container fluid className="py-2">
       <Row>
-        <Col md="6">
+        <Col md="12">
           <Table
             title="Work spaces"
             columns={[
@@ -36,7 +36,7 @@ const Workspaces = () => {
             ]}
           />
         </Col>
-        <Col md="6">
+        <Col md="12">
           <TextEditor />
         </Col>
       </Row>
