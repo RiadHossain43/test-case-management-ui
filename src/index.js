@@ -5,6 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import "assets/plugins/nucleo/css/nucleo.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "assets/scss/app.scss";
+import "assets/css/blueprint.css";
 
 import App from "App";
 

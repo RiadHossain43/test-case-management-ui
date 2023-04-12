@@ -1,55 +1,31 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// reactstrap components
-import {
-  UncontrolledCollapse,
-  NavbarBrand,
-  Navbar,
-  NavItem,
-  NavLink,
-  Nav,
-  Container,
-  Row,
-  Col,
-} from "reactstrap";
 import logo from "assets/img/brand/logo.svg";
+import { useNavigate } from "react-router-dom"
+import {
+  Alignment,
+  Button,
+  Classes,
+  Navbar,
+  NavbarDivider,
+  NavbarGroup,
+  NavbarHeading,
+} from "@blueprintjs/core";
 const AdminNavbar = () => {
+  const navigate = useNavigate()
   return (
     <>
-      <Navbar className="navbar-top navbar-horizontal" expand="md">
-        <Container className="px-4">
-          <NavbarBrand to="/" tag={Link}>
-            <img className="navbar-brand-img" alt="automatise" src={logo} />
-          </NavbarBrand>
-          <button className="navbar-toggler" id="navbar-collapse-main">
-            <span className="navbar-toggler-icon" />
-          </button>
-          <UncontrolledCollapse navbar toggler="#navbar-collapse-main">
-            <div className="navbar-collapse-header d-md-none">
-              <Row>
-                <Col className="collapse-brand" xs="6">
-                  <Link to="/">
-                    <img alt="..." src={logo} />
-                  </Link>
-                </Col>
-                <Col className="collapse-close" xs="6">
-                  <button className="navbar-toggler" id="navbar-collapse-main">
-                    <span />
-                    <span />
-                  </button>
-                </Col>
-              </Row>
-            </div>
-            <Nav className="ml-auto" navbar>
-              <NavItem>
-                <NavLink className="nav-link-icon" to="/console" tag={Link}>
-                  <i className="ni ni-tv-2" />
-                  <span className="nav-link-inner--text">Console</span>
-                </NavLink>
-              </NavItem>
-            </Nav>
-          </UncontrolledCollapse>
-        </Container>
+      <Navbar fixedToTop>
+        <NavbarGroup align={Alignment.LEFT} >
+          <NavbarHeading className={Classes.ALIGN_LEFT}><img height="10" alt="automatise" src={logo} /></NavbarHeading>
+        </NavbarGroup>
+        <NavbarGroup align={Alignment.RIGHT} >
+          <Button className={Classes.MINIMAL} icon="home" text="Home" />
+          <NavbarDivider />
+          <Button className={Classes.MINIMAL} icon="document" onClick={() => navigate("/console")}>
+            Console
+          </Button>
+        </NavbarGroup>
       </Navbar>
     </>
   );

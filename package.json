@@ -14,6 +14,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "start:dev": "env-cmd -f ./.env.dev react-scripts start",
+    "build:dev": "env-cmd -f ./.env.dev react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start",
@@ -32,6 +34,14 @@
     "not op_mini all"
   ],
   "dependencies": {
+    "@blueprintjs/core": "^4.17.8",
+    "@blueprintjs/datetime": "^4.4.27",
+    "@blueprintjs/datetime2": "^0.9.25",
+    "@blueprintjs/icons": "^4.14.5",
+    "@blueprintjs/popover2": "^1.13.12",
+    "@blueprintjs/select": "^4.9.12",
+    "@blueprintjs/table": "^4.9.3",
+    "@blueprintjs/timezone": "^4.5.31",
     "@fortawesome/fontawesome-free": "6.2.1",
     "axios": "^1.2.1",
     "bootstrap": "4.6.0",
@@ -51,6 +61,7 @@
     "react-chartjs-2": "5.0.1",
     "react-copy-to-clipboard": "5.1.0",
     "react-dom": "18.2.0",
+    "react-grid-system": "^8.1.9",
     "react-markdown": "^8.0.4",
     "react-router-dom": "6.4.4",
     "react-scripts": "5.0.1",
