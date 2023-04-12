@@ -1,18 +1,7 @@
-
-// Core
-
 @import "app/custom/functions";
 @import "app/custom/variables";
 @import "app/custom/mixins";
-
-// bootstrap (4.6.0) components
-
-
-@import "~bootstrap/scss/grid";
 @import "~bootstrap/scss/nav";
 @import "~bootstrap/scss/navbar";
 @import "~bootstrap/scss/utilities";
-
-// Argon utilities and components
-
 @import "app/custom/components";

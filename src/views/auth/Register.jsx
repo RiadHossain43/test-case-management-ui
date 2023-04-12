@@ -1,8 +1,7 @@
 import useForm from "hooks/useForm";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  Row, Button, Col, Form, FormGroup, Input, InputGroup, InputGroupText
-} from "reactstrap";
+import { FormGroup, InputGroup, Button } from "@blueprintjs/core";
+import { Row, Col, Container } from "react-grid-system";
 import { createUser } from "services/userServices";
 const Register = () => {
   let { dataModel, handleChange, handleSubmit } = useForm({
@@ -23,89 +22,68 @@ const Register = () => {
     }
   }
   return (
-    <Row>
-      <Col className="mx-auto px-lg-5 py-lg-5" lg="4" md="7">
-        <div className="text-center text-muted mb-4">
-          <small>Sign up as a user</small>
-        </div>
-        <Form role="form">
-          <FormGroup className="mb-3">
-            <InputGroup className="input-group-alternative">
-              <InputGroupText>
-                <i className="ni ni-user-run" />
-              </InputGroupText>
-              <Input
-                placeholder="Name"
-                type="text"
-                autoComplete="off"
-                id="name"
-                onChange={(e) =>
-                  handleChange({
-                    key: "name",
-                    value: e.currentTarget.value,
-                  })
-                }
-              />
-            </InputGroup>
-          </FormGroup>
-          <FormGroup className="mb-3">
-            <InputGroup className="input-group-alternative">
-              <InputGroupText>
-                <i className="ni ni-email-83" />
-              </InputGroupText>
-
-              <Input
-                placeholder="Email"
-                type="email"
-                autoComplete="off"
-                id="email"
-                onChange={(e) =>
-                  handleChange({
-                    key: "email",
-                    value: e.currentTarget.value,
-                  })
-                }
-              />
-            </InputGroup>
+    <Container>
+      <Row>
+        <Col md={4}>
+          <p className={"bp4-running-text bp4-text-muted"}>Sign up as a user</p>
+          <FormGroup>
+            <InputGroup
+              leftIcon="new-person"
+              placeholder="i.e. Jhon Doe"
+              type="text"
+              autoComplete="off"
+              onChange={(e) =>
+                handleChange({
+                  key: "name",
+                  value: e.currentTarget.value,
+                })
+              }
+            />
           </FormGroup>
           <FormGroup>
-            <InputGroup className="input-group-alternative">
-              <InputGroupText>
-                <i className="ni ni-lock-circle-open" />
-              </InputGroupText>
-
-              <Input
-                placeholder="Password"
-                type="password"
-                autoComplete="off"
-                id="password"
-                onChange={(e) =>
-                  handleChange({
-                    key: "password",
-                    value: e.currentTarget.value,
-                  })
-                }
-              />
-            </InputGroup>
+            <InputGroup
+              leftIcon="envelope"
+              placeholder="i.e. your.name@domain.com"
+              type="email"
+              autoComplete="off"
+              onChange={(e) =>
+                handleChange({
+                  key: "email",
+                  value: e.currentTarget.value,
+                })
+              }
+            />
           </FormGroup>
-          <div className="text-center">
+          <FormGroup>
+            <InputGroup
+              leftIcon="lock"
+              placeholder="i.e. KH%43S(AUS@#)JASB"
+              type="password"
+              autoComplete="off"
+              onChange={(e) =>
+                handleChange({
+                  key: "password",
+                  value: e.currentTarget.value,
+                })
+              }
+            />
+          </FormGroup>
+          <FormGroup>
             <Button
-              className="btn-block my-5"
-              color="primary"
+              fill
+              intent="Primary"
               type="button"
               onClick={(e) => handleSubmit(e, _register)}
             >
               Sign up
             </Button>
-          </div>
+          </FormGroup>
           <Link className="btn-link" to={"/auth/login"}>
-            <Button className="btn-link" size="sm">
-              Sign in with credentials
-            </Button>
+            <small>Sign in with credentials</small>
           </Link>
-        </Form>
-      </Col>
-    </Row>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

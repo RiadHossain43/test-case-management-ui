@@ -1,7 +1,3 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import logo from "assets/img/brand/logo.svg";
-import { useNavigate } from "react-router-dom"
 import {
   Alignment,
   Button,
@@ -11,23 +7,30 @@ import {
   NavbarGroup,
   NavbarHeading,
 } from "@blueprintjs/core";
+import logo from "assets/img/brand/logo.svg";
+import { Container } from "react-grid-system";
+import { useNavigate } from "react-router-dom";
 const AdminNavbar = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
-    <>
-      <Navbar fixedToTop>
-        <NavbarGroup align={Alignment.LEFT} >
-          <NavbarHeading className={Classes.ALIGN_LEFT}><img height="10" alt="automatise" src={logo} /></NavbarHeading>
+    <Navbar fixedToTop>
+      <Container>
+        <NavbarGroup align={Alignment.LEFT}>
+          <NavbarHeading className={Classes.ALIGN_LEFT}>
+            <img height="10" alt="automatise" src={logo} />
+          </NavbarHeading>
         </NavbarGroup>
-        <NavbarGroup align={Alignment.RIGHT} >
-          <Button className={Classes.MINIMAL} icon="home" text="Home" />
-          <NavbarDivider />
-          <Button className={Classes.MINIMAL} icon="document" onClick={() => navigate("/console")}>
+        <NavbarGroup align={Alignment.RIGHT}>
+          <Button
+            className={Classes.MINIMAL}
+            icon="console"
+            onClick={() => navigate("/console")}
+          >
             Console
           </Button>
         </NavbarGroup>
-      </Navbar>
-    </>
+      </Container>
+    </Navbar>
   );
 };
 
